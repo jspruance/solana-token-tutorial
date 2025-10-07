@@ -71,6 +71,6 @@ Wallets automatically display and resize the image when your token is viewed.
 
 ---
 
-**Author:** Jonathan Spruance  
+**Author:** BlockExplorer
 **Date:** 2025  
 **Version:** 1.0  
