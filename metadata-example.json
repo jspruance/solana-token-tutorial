@@ -1,0 +1,32 @@
+{
+  "name": "BlockExplorer Token",
+  "symbol": "BLX",
+  "description": "The official utility token of the BlockExplorer project — empowering open blockchain education and exploration.",
+  "image": "ipfs://QmReplaceWithYourImageCID/blockexplorer-logo.png",
+  "external_url": "https://blockexplorer.io",
+  "attributes": [
+    {
+      "trait_type": "Category",
+      "value": "Utility"
+    },
+    {
+      "trait_type": "Network",
+      "value": "Solana Devnet"
+    }
+  ],
+  "properties": {
+    "files": [
+      {
+        "uri": "ipfs://QmReplaceWithYourImageCID/blockexplorer-logo.png",
+        "type": "image/png"
+      }
+    ],
+    "category": "image",
+    "creators": [
+      {
+        "address": "YOUR_WALLET_PUBLIC_KEY_HERE",
+        "share": 100
+      }
+    ]
+  }
+}
