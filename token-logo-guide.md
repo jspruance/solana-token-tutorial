@@ -16,7 +16,7 @@ Following these recommendations ensures your logo displays correctly in wallets 
 | **File Type** | PNG (preferred) | Supports transparency; JPG acceptable |
 | **File Size** | ≤ 500 KB | Keep small for faster IPFS loading |
 | **Background** | Transparent or dark-mode-friendly | Phantom uses dark UI themes |
-| **Filename** | lowercase, no spaces (e.g., `ektachrome-logo.png`) | Prevents IPFS link issues |
+| **Filename** | lowercase, no spaces (e.g., `blockexplorer-logo.png`) | Prevents IPFS link issues |
 
 ---
 
@@ -36,13 +36,13 @@ Example entry inside your `metadata.json` file:
 
 ```json
 {
-  "name": "Ektachrome Coin",
+  "name": "BlockExplorer Coin",
   "symbol": "EKT",
-  "description": "A psychedelic-era inspired Solana token for Ektachrome.",
-  "image": "ipfs://QmXabc123/ektachrome-logo.png",
+  "description": "A Solana token for BlockExplorer.",
+  "image": "ipfs://QmXabc123/blockexplorer-logo.png",
   "properties": {
     "files": [
-      { "uri": "ipfs://QmXabc123/ektachrome-logo.png", "type": "image/png" }
+      { "uri": "ipfs://QmXabc123/blockexplorer-logo.png", "type": "image/png" }
     ],
     "category": "image"
   }
