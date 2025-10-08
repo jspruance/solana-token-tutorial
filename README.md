@@ -8,19 +8,53 @@ All steps are tested and work on **Windows (via WSL)**, **macOS**, and **Linux**
 
 ## 🧩 Step-by-Step Tutorial
 
-### 1️⃣ Install Solana CLI
-Use the official installer:
+---
+
+## ⚙️ Pre-Step: Windows Setup (WSL Requirement)
+
+If you’re on Windows, Solana development requires the **Windows Subsystem for Linux (WSL)**.
+
+Open **PowerShell as Administrator** and run:
 
 ```bash
-sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+wsl --install
 ```
 
-Confirm installation:
+Restart your PC when prompted, then open **Ubuntu** from the Start menu.  
+You’ll be asked to create a Linux username and password — that’s your local user account.
+
+> 💡 Once WSL is installed, all remaining steps are performed inside the **Ubuntu terminal**, not PowerShell.
+
+---
+
+## 1️⃣ Install Solana CLI & Dependencies (Official Solana Installer)
+
+Run the official installer from the Solana documentation:
+
 ```bash
-solana --version
+curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
 ```
 
-Switch to Devnet:
+Example successful output:
+
+```
+Installed Versions:
+Rust: rustc 1.86.0 (05f9846f8 2025-03-31)
+Solana CLI: solana-cli 2.2.12 (src:0315eb6a; feat:1522022101, client:Agave)
+Anchor CLI: anchor-cli 0.31.1
+Node.js: v23.11.0
+Yarn: 1.22.1
+```
+
+Verify installation:
+
+```bash
+rustc --version && solana --version && anchor --version && node --version && yarn --version
+```
+
+---
+
+Switch to the **Devnet** (Solana’s free public test network):
 ```bash
 solana config set --url devnet
 ```
