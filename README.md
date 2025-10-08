@@ -5,6 +5,22 @@ All steps are tested and work on **Windows (via WSL)**, **macOS**, and **Linux**
 
 ---
 
+## ✅ Quick Reference Summary
+
+| Step | Command | Purpose |
+|------|----------|----------|
+| Pre | `wsl --install` | Set up WSL on Windows |
+| 1 | Solana installer | Install all dependencies |
+| 2 | `solana config set --url https://api.devnet.solana.com` | Switch to Devnet |
+| 3 | `solana-keygen new` | Create wallet |
+| 4 | `spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9` | Create Token‑2022 mint |
+| 5 | `spl-token initialize-metadata <MINT> "MyToken Token" "MYT" "https://gateway.pinata.cloud/ipfs/<CID>/metadata.json"` | Set metadata on mint |
+| 6 | `spl-token create-account <MINT>` | Create token account |
+| 7 | `spl-token mint <MINT> 1000000` | Mint supply |
+| 8 | `explorer.solana.com/address/<MINT>?cluster=devnet` | Verify token |
+
+---
+
 ## Step 1. Windows (WSL) Setup
 
 If you're on Windows, open **PowerShell (Run as Administrator)** and run:
@@ -161,14 +177,7 @@ spl-token update-metadata <MINT_ADDRESS> symbol "NEW"
 
 ---
 
-## Step 12. Legacy Tokens (Tokenkeg)
-
-If your token was created under the older Tokenkeg program, use the **Metaplex Token Metadata** program (via **Metaboss** or SDK) to attach metadata.  
-Token‑2022 metadata cannot be retrofitted onto older mints.
-
----
-
-## Verify in Explorer
+## Step 12. Verify in Explorer
 
 Open:
 ```
@@ -185,24 +194,6 @@ You should see your token name, symbol, and logo.
 | Image not showing in Phantom | Use absolute `ipfs://<CID>/file.png` inside your metadata JSON |
 | Metadata not updating | Ensure you’re signing with the mint authority |
 | Commands missing | Reload PATH: `source ~/.bashrc` |
-
----
-
-## 🧩 Quick Commands Summary
-
-```
-# Create Token-2022 mint
-spl-token create-token   --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb   --enable-metadata --decimals 9
-
-# Upload metadata + image folder to Pinata → get <FOLDER_CID>
-
-# Initialize metadata on the mint
-spl-token initialize-metadata <MINT_ADDRESS>   "MyToken Token" "MYT"   "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
-
-# Create account + mint supply
-spl-token create-account <MINT_ADDRESS>
-spl-token mint <MINT_ADDRESS> 1000000
-```
 
 ---
 
