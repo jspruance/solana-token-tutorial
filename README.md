@@ -1,58 +1,31 @@
-# 🪙 Solana Token Tutorial — Create Your Own Token (2025)
+# 🪙 Solana Token Tutorial — Token-2022 (2025 edition)
 
-This guide walks you through creating and managing your own token on the Solana blockchain using the latest CLI tools (2025 versions).  
-All steps are compatible with **Windows (via WSL)**, **macOS**, and **Linux**.
+This README replaces the legacy flow and shows a modern, production-ready workflow (Oct 2025) using **Token-2022** metadata extensions so name / symbol / image live natively on the mint.  
+All steps work on **Windows (WSL)**, **macOS**, and **Linux**. Use **Devnet** for testing.
 
 ---
 
-## ⚙️ Pre-Step: Windows Setup (WSL Requirement)
-
-If you’re on Windows, Solana development requires the **Windows Subsystem for Linux (WSL)**.
-
-Open **PowerShell as Administrator** and run:
-
+## ⚙️ Pre-step: Windows (WSL)
+If you're on Windows, open PowerShell **as Administrator** and run:
 ```bash
 wsl --install
 ```
-
-Restart your PC when prompted, then open **Ubuntu** from the Start menu.  
-You’ll be asked to create a Linux username and password — that’s your local user account.
-
-> 💡 Once WSL is installed, all remaining steps are performed inside the **Ubuntu terminal**, not PowerShell.
+Restart, open your Ubuntu WSL terminal, and do the rest inside that terminal.
 
 ---
 
-## 1. Install Dependencies (Official Solana Installer)
-
-Run the official installer from the Solana documentation:
-
+## 1. Install dependencies (official Solana installer)
 ```bash
 curl --proto '=https' --tlsv1.2 -sSfL https://solana-install.solana.workers.dev | bash
 ```
-
-Example successful output:
-
-```
-Installed Versions:
-Rust: rustc 1.86.0 (05f9846f8 2025-03-31)
-Solana CLI: solana-cli 2.2.12 (src:0315eb6a; feat:1522022101, client:Agave)
-Anchor CLI: anchor-cli 0.31.1
-Node.js: v23.11.0
-Yarn: 1.22.1
-```
-
-Verify installation:
-
+Verify:
 ```bash
-rustc --version && solana --version && anchor --version && node --version && yarn --version
+rustc --version && solana --version && node --version
 ```
 
 ---
 
 ## 2. Configure Solana for Devnet
-
-Switch to the **Devnet** (Solana’s free public test network):
-
 ```bash
 solana config set --url https://api.devnet.solana.com
 solana config get
@@ -60,208 +33,175 @@ solana config get
 
 ---
 
-## 3. Create and Fund Your Wallet
-
-Generate a new wallet (keypair) and airdrop 2 test SOL:
-
+## 3. Create and fund your wallet
 ```bash
 solana-keygen new --outfile ~/.config/solana/devnet.json
 solana config set --keypair ~/.config/solana/devnet.json
 solana airdrop 2
 solana balance
 ```
-
-Save your **12-word recovery phrase** safely — it can restore your wallet later.
-
----
-
-## 4. Create Your Token Mint
-
-Create your new token mint:
-
-```bash
-spl-token create-token
-```
-
-This returns your token’s **mint address** (its on-chain ID).  
-Example:
-```
-Token: 8H5y3xJ7R6Qye4nTn6C2W5ZQAvTpd9RVkX2wZCPLM5wE
-```
+Save your 12-word recovery phrase securely.
 
 ---
 
-## 5. Create a Token Account
-
-Each wallet needs a token account to hold tokens:
-
-```bash
-spl-token create-account <TOKEN_MINT_ADDRESS>
-```
+## Why Token-2022?
+Token-2022 lets you store `name`, `symbol`, and a `uri` **on the mint itself** via native token extensions — no separate Metaplex metadata account required for new mints. This is cleaner, supported by wallets, and recommended for new tokens in 2025.
 
 ---
 
-## 6. Mint Tokens
-
-Mint one million tokens to your wallet:
-
+## 4. Create a Token-2022 mint (with metadata enabled)
+Use the **Token-2022 program id** and enable metadata at creation:
 ```bash
-spl-token mint <TOKEN_MINT_ADDRESS> 1000000
-spl-token balance <TOKEN_MINT_ADDRESS>
+spl-token create-token   --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb   --enable-metadata --decimals 9
 ```
+Output will include your **MINT_ADDRESS**. Copy it.
 
 ---
 
-## 7. Transfer, Burn, or Manage Supply
-
-### (A) Create a Second Wallet
-```bash
-solana-keygen new --outfile ~/.config/solana/second.json
+## 5. Prepare metadata JSON + logo (hosting on IPFS via Pinata)
+Create a local folder:
+```
+mytoken/
+  ├─ metadata.json
+  └─ mytoken-logo.png
 ```
 
-### (B) Fund the New Wallet
-```bash
-solana airdrop 1 --keypair ~/.config/solana/second.json
-```
-
-### (C) Get the Public Address
-```bash
-solana-keygen pubkey ~/.config/solana/second.json
-```
-
-### (D) Transfer Tokens
-```bash
-spl-token transfer <TOKEN_MINT_ADDRESS> 100 <RECIPIENT_PUBKEY> --fund-recipient
-```
-
-### (E) Burn Tokens (Optional)
-```bash
-spl-token burn <TOKEN_MINT_ADDRESS> 50
-```
-
----
-
-## 8. View Your Token on Solana Explorer
-
-Visit:
-
-🔗 [https://explorer.solana.com/?cluster=devnet](https://explorer.solana.com/?cluster=devnet)
-
-Paste your token’s **mint address** to view its on-chain details.
-
----
-
-## 9. Add Your Token to Phantom Wallet
-
-### (A) Install Phantom
-Download from [https://phantom.app](https://phantom.app) and install the browser extension (Chrome, Brave, or Firefox).
-
-### (B) Import Your CLI Wallet
-1. Open Phantom → **Import an existing wallet**
-2. Enter the **12-word recovery phrase** from `solana-keygen new`
-3. Set a password and finish setup
-
-> 💡 This connects Phantom to the same wallet created in the CLI.
-
-You can recover the phrase again later using:
-```bash
-solana-keygen recover
-```
-
-### (C) Switch Phantom to Devnet
-1. Go to **Settings → Developer Settings → Enable Test Networks**
-2. Then **Settings → Change Network → Devnet**
-
-### (D) Add Your Token Manually
-1. Go to **Settings → Manage Token List → Custom Token**
-2. Paste your token’s **mint address**
-3. Click **Save**
-
-Your new token should now appear in Phantom with its balance.
-
----
-
-## 10. (Optional) Add Metadata with Metaplex
-
-Attach a name, symbol, and image to your token:
-
-```bash
-mplx core asset create \
-  --name "My Token" \
-  --uri "https://gateway.pinata.cloud/ipfs/<YOUR_CID>/metadata.json" \
-  -k ~/.config/solana/devnet.json \
-  --rpc https://api.devnet.solana.com
-```
-
-Example metadata JSON:
+**Recommended metadata.json (for Pinata folder upload)**:
 ```json
 {
-  "name": "MyToken",
+  "name": "MyToken Token",
   "symbol": "MYT",
-  "description": "A demo token built on Solana.",
-  "image": "https://mytoken.com/logo.png"
+  "description": "The official utility token of MyToken.",
+  "image": "mytoken-logo.png",
+  "external_url": "https://mytoken.io",
+  "properties": {
+    "files": [
+      { "uri": "mytoken-logo.png", "type": "image/png" }
+    ],
+    "category": "image"
+  }
 }
 ```
+**Notes**:
+- For a quick demo: upload the entire folder to Pinata (Upload Folder). This produces a **folder CID** and serves both files under that CID.
+- For **wallet compatibility (recommended)**: after upload, **use the folder CID** to build an absolute `ipfs://` URI (see step 6) and **re-upload** metadata.json with the absolute `image` field if you want the JSON itself to reference `ipfs://...`. Many wallets (including Phantom on some clusters) prefer explicit `ipfs://<CID>/file.png` entries.
 
-> Only the **update authority** (you) can modify metadata.  
-> To lock it permanently:
+---
+
+## 6. Upload to Pinata (or NFT.Storage)
+1. Upload the whole `mytoken/` folder to Pinata.
+2. Copy the **folder CID** from Pinata (example `bafy...`).
+3. Your live URLs will be:
+   - Metadata: `https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json`
+   - Image: `https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/mytoken-logo.png`
+
+**Optional** (make metadata JSON explicit for wallets):
+- Edit your local `metadata.json` to set:
+  ```json
+  "image": "ipfs://<FOLDER_CID>/mytoken-logo.png"
+  ```
+- Upload only the updated `metadata.json` to Pinata (it will receive a new CID). Use that metadata URL in step 7.
+
+---
+
+## 7. Initialize on-mint metadata (attach name/symbol/URI to the mint)
+Use the `spl-token` helper commands for Token-2022:
+
 ```bash
-mplx core asset update <assetId> \
-  --name "MyToken" \
-  --uri "https://gateway.pinata.cloud/ipfs/<NEW_METADATA_CID>/metadata.json" \
-  -k ~/.config/solana/devnet.json \
-  --rpc https://api.devnet.solana.com
+# Initialize metadata on the mint (sets name, symbol, and URI)
+spl-token initialize-metadata <MINT_ADDRESS>   "MyToken Token" "MYT"   "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
+```
+
+**Verify**:
+```bash
+spl-token show <MINT_ADDRESS>
+# or (if available)
+spl-token get-metadata <MINT_ADDRESS>
+```
+
+Wallets and explorers that support Token-2022 should now display name, symbol, and image. Give ~30–90 seconds, then refresh Phantom/Explorer.
+
+---
+
+## 8. Create an associated token account and mint tokens
+```bash
+spl-token create-account <MINT_ADDRESS>
+spl-token mint <MINT_ADDRESS> 1000000
+spl-token balance <MINT_ADDRESS>
 ```
 
 ---
 
-## 11. (Optional) Make It Tradable
-
-To list your token on Solana DEXs (like **Raydium** or **Jupiter**), create a liquidity pool through their UIs or SDKs.  
-That’s an advanced step — optional for this basic token setup.
-
----
-
-## ✅ Quick Reference Summary
-
-| Step | Command | Purpose |
-|------|----------|----------|
-| Pre | `wsl --install` | Set up WSL on Windows |
-| 1 | Solana installer | Install all dependencies |
-| 2 | `solana config set --url devnet` | Switch to Devnet |
-| 3 | `solana-keygen new` | Create wallet |
-| 4 | `spl-token create-token` | Create token mint |
-| 5 | `spl-token create-account` | Create token account |
-| 6 | `spl-token mint` | Mint supply |
-| 7 | `spl-token transfer` | Manage or burn tokens |
-| 8 | Explorer | Verify token |
-| 9 | Phantom | Import wallet + view token |
-| 10 | Metaplex | Add metadata |
-| 11 | DEX | Optional trading setup |
+## 9. Add token to Phantom
+- Install Phantom extension (https://phantom.app) if needed.
+- Import your CLI wallet using the 12-word phrase or keyfile.
+- Switch Phantom to **Devnet**: Settings → Developer Settings → Enable Test Networks → Change Network → Devnet.
+- If token doesn't auto-appear, add it manually via **Manage Token List → Custom Token** and paste the `<MINT_ADDRESS>`.
 
 ---
 
-### 🧩 Troubleshooting Tips
-
-- If you get `command not found` for `solana`, run:
-  ```bash
-  source ~/.bashrc
-  ```
-- To check your wallet address:
-  ```bash
-  solana address
-  ```
-- To view all token accounts:
-  ```bash
-  spl-token accounts
-  ```
-- To reset configuration:
-  ```bash
-  solana config set --url https://api.devnet.solana.com
-  ```
+## 10. Updating metadata later
+To update the on-mint metadata:
+```bash
+spl-token update-metadata <MINT_ADDRESS> uri "https://gateway.pinata.cloud/ipfs/<NEW_FOLDER_CID>/metadata.json"
+# or update name/symbol
+spl-token update-metadata <MINT_ADDRESS> name "New Name"
+spl-token update-metadata <MINT_ADDRESS> symbol "NEW"
+```
 
 ---
 
-**Author:** BlockExplorer 
+## 11. If you already have a legacy Tokenkeg mint
+If your mint was created under the classic Token program, you **cannot** retroactively add Token-2022 extensions. Use the Metaplex Token Metadata program (common options):
+
+**Metaboss (simple CLI)**:
+```bash
+cargo install metaboss --locked
+
+# create minimal on-chain metadata for existing mint
+cat > onchain.json << 'JSON'
+{ "name": "MyToken Token", "symbol": "MYT",
+  "uri": "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json" }
+JSON
+
+metaboss create metadata -a <MINT_ADDRESS> -m ./onchain.json -k ~/.config/solana/devnet.json --rpc https://api.devnet.solana.com
+```
+
+Or programmatic: use Umi or Metaplex JS SDK to create the metadata account (advanced).
+
+---
+
+## 12. Verify in Explorer
+Visit:
+`https://explorer.solana.com/address/<MINT_ADDRESS>?cluster=devnet`
+
+You should see name/symbol and image once the metadata is active.
+
+---
+
+## Troubleshooting (common issues)
+- **Image not showing in Phantom**: Ensure metadata JSON uses absolute `ipfs://<CID>/file.png` or the metadata JSON URI uses a gateway URL that points to a JSON that itself references `ipfs://...`. Refresh Phantom.
+- **`spl-token` commands missing**: Ensure the updated Solana/spl-token binaries are in your PATH. `source ~/.bashrc` if you just installed.
+- **Metadata not writing**: Confirm you're signing with the mint authority (`solana address` matches the authority).
+
+---
+
+## TL;DR (quick commands)
+```bash
+# create token (Token-2022)
+spl-token create-token --program-id TokenzQdB... --enable-metadata --decimals 9
+
+# upload folder to Pinata -> get <FOLDER_CID>
+
+# initialize metadata on-mint
+spl-token initialize-metadata <MINT_ADDRESS> "MyToken Token" "MYT" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
+
+# create account + mint
+spl-token create-account <MINT_ADDRESS>
+spl-token mint <MINT_ADDRESS> 1000000
+```
+
+---
+
+**Author:** BlockExplorer  
 **Date:** 2025  
-**Version:** Solana CLI 2.2.12
