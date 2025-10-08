@@ -55,12 +55,15 @@ rustc --version && solana --version && anchor --version && node --version && yar
 ---
 
 
+---
+
 ### 2️⃣ Create a Wallet
 Switch to the **Devnet** (Solana’s free public test network):
 ```bash
 solana config set --url devnet
 ```
 
+Create a wallet
 ```bash
 solana-keygen new
 ```
