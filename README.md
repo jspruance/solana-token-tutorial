@@ -51,7 +51,7 @@ solana airdrop 2
 Token-2022 allows on-chain metadata, decimals configuration, and future-proof extensions.
 
 ```bash
-spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9
+spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadatazQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9
 ```
 
 Copy the **mint address** from the output.
@@ -177,7 +177,7 @@ For reference, here’s the full command sequence:
 | 1 | Solana installer | Install all dependencies |
 | 2 | `solana config set --url devnet` | Switch to Devnet |
 | 3 | `solana-keygen new` | Create wallet |
-| 4 | `spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9` | Create Token-2022 mint |
+| 4 | `spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadatazQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9` | Create Token-2022 mint |
 | 5 | `spl-token create-account <MINT_ADDRESS>` | Create token account |
 | 6 | `spl-token mint <MINT_ADDRESS> 1000000` | Mint supply |
 | 7 | `spl-token initialize-metadata <MINT_ADDRESS> "MyToken" "MTK" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"` | Attach metadata |
