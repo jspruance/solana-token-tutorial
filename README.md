@@ -88,7 +88,7 @@ Create a local folder, e.g. `metadata/`, with two files:
 
 ```
 metadata/
- ├── blockexplorer-logo.png
+ ├── mytoken-logo.png
  └── metadata.json
 ```
 
@@ -96,17 +96,17 @@ metadata/
 
 ```json
 {
-  "name": "BlockExplorer Token",
-  "symbol": "BLX",
-  "description": "The official utility token of the BlockExplorer project — empowering open blockchain education and exploration.",
-  "image": "blockexplorer-logo.png",
-  "external_url": "https://blockexplorer.io",
+  "name": "MyToken Token",
+  "symbol": "MTK",
+  "description": "The official utility token of the MyToken project — an example Solana token used for this tutorial.",
+  "image": "mytoken-logo.png",
+  "external_url": "https://mytoken.io",
   "attributes": [
     { "trait_type": "Category", "value": "Utility" },
     { "trait_type": "Network", "value": "Solana Devnet" }
   ],
   "properties": {
-    "files": [{ "uri": "blockexplorer-logo.png", "type": "image/png" }],
+    "files": [{ "uri": "mytoken-logo.png", "type": "image/png" }],
     "category": "image",
     "creators": [
       { "address": "<YOUR_WALLET_ADDRESS>", "share": 100 }
@@ -130,14 +130,14 @@ https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json
 and the image at:
 
 ```
-https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/blockexplorer-logo.png
+https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/mytoken-logo.png
 ```
 
 ---
 
 ### 8️⃣ Attach Metadata to the Token
 ```bash
-spl-token initialize-metadata <MINT_ADDRESS> "BlockExplorer Token" "BLX" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
+spl-token initialize-metadata <MINT_ADDRESS> "MyToken Token" "MTK" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
 ```
 
 This associates your metadata with your Token-2022 mint.
@@ -186,6 +186,6 @@ For reference, here’s the full command sequence:
 
 ---
 
-🧠 **Author:** Jonathan Spruance  
+🧠 **Author:** BlockExplorer 
 📅 **Updated:** October 2025  
 📘 **Version:** Token-2022 Tutorial Edition
