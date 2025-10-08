@@ -27,7 +27,7 @@ You’ll be asked to create a Linux username and password — that’s your loca
 
 ---
 
-## 1️⃣ Install Solana CLI & Dependencies (Official Solana Installer)
+### 1️⃣ Install Solana CLI & Dependencies (Official Solana Installer)
 
 Run the official installer from the Solana documentation:
 
@@ -54,14 +54,13 @@ rustc --version && solana --version && anchor --version && node --version && yar
 
 ---
 
+
+### 2️⃣ Create a Wallet
 Switch to the **Devnet** (Solana’s free public test network):
 ```bash
 solana config set --url devnet
 ```
 
----
-
-### 2️⃣ Create a Wallet
 ```bash
 solana-keygen new
 ```
