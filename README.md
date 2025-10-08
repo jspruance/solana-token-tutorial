@@ -85,7 +85,7 @@ solana airdrop 2
 Token-2022 allows on-chain metadata, decimals configuration, and future-proof extensions.
 
 ```bash
-spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadatazQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9
+spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9
 ```
 
 Copy the **mint address** from the output.
