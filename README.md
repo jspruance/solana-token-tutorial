@@ -186,7 +186,11 @@ Your new token should now appear in Phantom with its balance.
 Attach a name, symbol, and image to your token:
 
 ```bash
-metaplex create_metadata   --name "MyToken"   --symbol "MYT"   --uri "https://mytoken.com/metadata.json"   --mint <YOUR_TOKEN_MINT_ADDRESS>
+mplx core asset create \
+  --name "My Token" \
+  --uri "https://gateway.pinata.cloud/ipfs/<YOUR_CID>/metadata.json" \
+  -k ~/.config/solana/devnet.json \
+  --rpc https://api.devnet.solana.com
 ```
 
 Example metadata JSON:
@@ -202,7 +206,11 @@ Example metadata JSON:
 > Only the **update authority** (you) can modify metadata.  
 > To lock it permanently:
 ```bash
-metaplex update_metadata --mint <YOUR_TOKEN_MINT_ADDRESS> --is_mutable false
+mplx core asset update <assetId> \
+  --name "MyToken" \
+  --uri "https://gateway.pinata.cloud/ipfs/<NEW_METADATA_CID>/metadata.json" \
+  -k ~/.config/solana/devnet.json \
+  --rpc https://api.devnet.solana.com
 ```
 
 ---

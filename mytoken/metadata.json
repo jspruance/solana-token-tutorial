@@ -1,9 +1,9 @@
 {
-  "name": "BlockExplorer Token",
-  "symbol": "BLX",
-  "description": "The official utility token of the BlockExplorer project — empowering open blockchain education and exploration.",
-  "image": "ipfs://QmReplaceWithYourImageCID/blockexplorer-logo.png",
-  "external_url": "https://blockexplorer.io",
+  "name": "MyToken Token",
+  "symbol": "MYT",
+  "description": "The official utility token of the MyToken project.",
+  "image": "mytoken-logo.png",
+  "external_url": "https://mytoken.io",
   "attributes": [
     {
       "trait_type": "Category",
@@ -17,7 +17,7 @@
   "properties": {
     "files": [
       {
-        "uri": "ipfs://QmReplaceWithYourImageCID/blockexplorer-logo.png",
+        "uri": "mytoken-logo.png",
         "type": "image/png"
       }
     ],

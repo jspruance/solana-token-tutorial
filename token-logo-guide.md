@@ -16,7 +16,7 @@ Following these recommendations ensures your logo displays correctly in wallets 
 | **File Type** | PNG (preferred) | Supports transparency; JPG acceptable |
 | **File Size** | ≤ 500 KB | Keep small for faster IPFS loading |
 | **Background** | Transparent or dark-mode-friendly | Phantom uses dark UI themes |
-| **Filename** | lowercase, no spaces (e.g., `blockexplorer-logo.png`) | Prevents IPFS link issues |
+| **Filename** | lowercase, no spaces (e.g., `mytoken-logo.png`) | Prevents IPFS link issues |
 
 ---
 
@@ -36,13 +36,13 @@ Example entry inside your `metadata.json` file:
 
 ```json
 {
-  "name": "BlockExplorer Coin",
-  "symbol": "EKT",
-  "description": "A Solana token for BlockExplorer.",
-  "image": "ipfs://QmXabc123/blockexplorer-logo.png",
+  "name": "MyToken Coin",
+  "symbol": "MYT"
+  "description": "A Solana token for MyToken.",
+  "image": "ipfs://QmXabc123/mytoken-logo.png",
   "properties": {
     "files": [
-      { "uri": "ipfs://QmXabc123/blockexplorer-logo.png", "type": "image/png" }
+      { "uri": "ipfs://QmXabc123/mytoken-logo.png", "type": "image/png" }
     ],
     "category": "image"
   }
@@ -71,6 +71,6 @@ Wallets automatically display and resize the image when your token is viewed.
 
 ---
 
-**Author:** BlockExplorer
+**Author:** MyToken
 **Date:** 2025  
 **Version:** 1.0  
