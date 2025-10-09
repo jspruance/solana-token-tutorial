@@ -62,10 +62,15 @@ solana config set --url devnet
 
 Create a wallet
 ```bash
-solana-keygen new
+solana-keygen new --outfile ~/.config/solana/devnet.json
 ```
 
 This will create your wallet and output your **public key** — save it somewhere safe.
+
+Set is as the active wallet for the Solana CLI
+```
+solana config set --keypair ~/.config/solana/devnet.json
+```
 
 Check your config:
 ```bash
