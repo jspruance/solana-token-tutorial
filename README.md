@@ -114,7 +114,18 @@ spl-token balance <MINT_ADDRESS>
 
 ---
 
-### 6️⃣ Add Metadata (Image + Description)
+### 6️⃣ Verify in Solana Explorer
+Visit:
+
+```
+https://explorer.solana.com/address/<MINT_ADDRESS>?cluster=devnet
+```
+
+Your token should now display with its **name**, **symbol**, and **image**.
+
+---
+
+### 7️⃣ Add Metadata (Image + Description)
 
 #### 📁 Folder Setup
 Create a local folder, e.g. `metadata/`, with two files:
@@ -150,7 +161,7 @@ metadata/
 
 ---
 
-### 7️⃣ Upload to IPFS (via Pinata)
+### 8️⃣ Upload to IPFS (via Pinata)
 
 1. Upload the entire `metadata` folder to Pinata.  
 2. Copy the folder’s CID (e.g. `bafybeihabc123...`).  
@@ -168,23 +179,12 @@ https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/mytoken-logo.png
 
 ---
 
-### 8️⃣ Attach Metadata to the Token
+### 9️⃣ Attach Metadata to the Token
 ```bash
 spl-token initialize-metadata <MINT_ADDRESS> "MyToken Token" "MTK" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
 ```
 
 This associates your metadata with your Token-2022 mint.
-
----
-
-### 9️⃣ Verify in Solana Explorer
-Visit:
-
-```
-https://explorer.solana.com/address/<MINT_ADDRESS>?cluster=devnet
-```
-
-Your token should now display with its **name**, **symbol**, and **image**.
 
 ---
 
@@ -237,10 +237,10 @@ For reference, here’s the full command sequence:
 | 3 | `solana-keygen new` | Create wallet |
 | 4 | `spl-token create-token --program-id TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb --enable-metadata --decimals 9` | Create Token-2022 mint |
 | 5 | `spl-token create-account <MINT_ADDRESS>` | Create token account |
-| 6 | `spl-token mint <MINT_ADDRESS> 1000000` | Mint supply |
+| 6 | Explorer | Verify token in Explorer |
+| 6.5 | `spl-token mint <MINT_ADDRESS> 1000000` | Mint supply |
 | 7 | `spl-token initialize-metadata <MINT_ADDRESS> "MyToken" "MTK" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"` | Attach metadata |
 | 8 | `spl-token transfer <MINT_ADDRESS> 100 <RECIPIENT_ADDRESS>` | Transfer tokens |
-| 9 | Explorer | Verify token in Explorer |
 | 11 (opt) | `spl-token update-metadata <MINT_ADDRESS> --name/--symbol/--uri ...` | Update metadata later |
 
 ---
