@@ -126,7 +126,7 @@ Visit:
 https://explorer.solana.com/address/<MINT_ADDRESS>?cluster=devnet
 ```
 
-Your token should now display with its **name**, **symbol**, and **image**.
+Your token will not display with its **name**, **symbol**, and **image** since we haven't added metadata yet.
 
 ---
 
