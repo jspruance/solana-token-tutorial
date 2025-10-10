@@ -17,7 +17,7 @@
   "properties": {
     "files": [
       {
-        "uri": "blockexplorer-logo.png",
+        "uri": "https://gateway.pinata.cloud/ipfs/<CID>/blockexplorer-logo.png",
         "type": "image/png"
       }
     ],
