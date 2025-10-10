@@ -2,7 +2,7 @@
   "name": "BlockExplorer Token",
   "symbol": "BLX",
   "description": "The official utility token of the BlockExplorer project — empowering open blockchain education and exploration.",
-  "image": "<IMAGE_URI>",
+  "image": "<IMG_URI>",
   "external_url": "https://blockexplorer.io",
   "attributes": [
     {
@@ -17,7 +17,7 @@
   "properties": {
     "files": [
       {
-        "uri": "<IMAGE_URI>",
+        "uri": "<IMG_URI>",
         "type": "image/png"
       }
     ],
