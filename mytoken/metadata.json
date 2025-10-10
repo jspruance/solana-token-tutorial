@@ -2,7 +2,7 @@
   "name": "MyToken Token",
   "symbol": "MYT",
   "description": "The official utility token of the MyToken project.",
-  "image": "mytoken-logo.png",
+  "image": "<IMAGE_URI>",
   "external_url": "https://mytoken.io",
   "attributes": [
     {
@@ -17,7 +17,7 @@
   "properties": {
     "files": [
       {
-        "uri": "https://gateway.pinata.cloud/ipfs/<CID>/mytoken-logo.png",
+        "uri": "<IMAGE_URI>",
         "type": "image/png"
       }
     ],
