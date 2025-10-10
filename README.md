@@ -183,7 +183,7 @@ You can host your token metadata on any IPFS gateway. Below are two simple optio
 
 ---
 
-#### 🅰 Option 1 — Pinata (Recommended for Beginners)
+#### 🅰 Option 1 — Pinata
 
 1. Upload the entire `metadata` folder to **Pinata**.  
 2. Copy the folder’s **CID** (e.g. `bafybeihabc123...`).  
