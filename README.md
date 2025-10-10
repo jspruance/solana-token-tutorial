@@ -55,29 +55,35 @@ rustc --version && solana --version && anchor --version && node --version && yar
 ---
 
 ### 2️⃣ Create a Wallet
+
 Switch to the **Devnet** (Solana’s free public test network):
+
 ```bash
 solana config set --url devnet
 ```
 
-Create a wallet
+Create a wallet:
+
 ```bash
 solana-keygen new --outfile ~/.config/solana/devnet.json
 ```
 
 This will create your wallet and output your **public key** — save it somewhere safe.
 
-Set is as the active wallet for the Solana CLI
-```
+Set it as the active wallet for the Solana CLI:
+
+```bash
 solana config set --keypair ~/.config/solana/devnet.json
 ```
 
 Check your config:
+
 ```bash
 solana config get
 ```
 
 Request some Devnet SOL for testing:
+
 ```bash
 solana airdrop 2
 ```
@@ -97,6 +103,7 @@ Copy the **mint address** from the output.
 ---
 
 ### 4️⃣ Create Token Account
+
 ```bash
 spl-token create-account <MINT_ADDRESS>
 ```
@@ -106,6 +113,7 @@ This creates a wallet account capable of holding your new token.
 ---
 
 ### 5️⃣ Mint Token Supply
+
 ```bash
 spl-token mint <MINT_ADDRESS> 1000000
 ```
@@ -113,6 +121,7 @@ spl-token mint <MINT_ADDRESS> 1000000
 This mints **1,000,000 tokens** to your account.
 
 Check balances:
+
 ```bash
 spl-token balance <MINT_ADDRESS>
 ```
@@ -120,6 +129,7 @@ spl-token balance <MINT_ADDRESS>
 ---
 
 ### 6️⃣ Verify in Solana Explorer
+
 Visit:
 
 ```
@@ -133,6 +143,7 @@ Your token will not display with its **name**, **symbol**, and **image** since w
 ### 7️⃣ Add Metadata (Image + Description)
 
 #### 📁 Folder Setup
+
 Create a local folder, e.g. `metadata/`, with two files:
 
 ```
@@ -166,10 +177,16 @@ metadata/
 
 ---
 
-### 8️⃣ Upload to IPFS (via Pinata)
+### 8️⃣ Upload to IPFS (via Pinata **or Storacha**)
 
-1. Upload the entire `metadata` folder to Pinata.  
-2. Copy the folder’s CID (e.g. `bafybeihabc123...`).  
+You can host your token metadata on any IPFS gateway. Below are two simple options:
+
+---
+
+#### 🅰 Option 1 — Pinata (Recommended for Beginners)
+
+1. Upload the entire `metadata` folder to **Pinata**.  
+2. Copy the folder’s **CID** (e.g. `bafybeihabc123...`).  
 3. Your JSON file will now be hosted at:
 
 ```
@@ -184,7 +201,43 @@ https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/mytoken-logo.png
 
 ---
 
+#### 🅱 Option 2 — Storacha (Alternative Gateway)
+
+If you prefer a decentralized, fast gateway alternative:
+
+1. Visit [https://storacha.network](https://storacha.network)  
+2. Click **Upload Folder** and select your `metadata` directory.  
+3. After upload, Storacha will return a **CID** (e.g. `bafkreihxyz789...`).  
+4. Your hosted files will be accessible at:
+
+```
+https://storacha.network/ipfs/<FOLDER_CID>/metadata.json
+```
+
+and
+
+```
+https://storacha.network/ipfs/<FOLDER_CID>/mytoken-logo.png
+```
+
+> 🧠 Tip: both Pinata and Storacha host the same IPFS content, so you can use **either gateway** URL interchangeably in the next step.
+
+---
+
+### ✅ Continue to Step 9
+
+Once you have your folder’s CID from **either** service, proceed to attach it to your token:
+
+```bash
+spl-token initialize-metadata <MINT_ADDRESS> "MyToken Token" "MTK" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
+```
+
+> Replace the URL with your chosen gateway (Pinata or Storacha).
+
+---
+
 ### 9️⃣ Attach Metadata to the Token
+
 ```bash
 spl-token initialize-metadata <MINT_ADDRESS> "MyToken Token" "MTK" "https://gateway.pinata.cloud/ipfs/<FOLDER_CID>/metadata.json"
 ```
@@ -194,6 +247,7 @@ This associates your metadata with your Token-2022 mint.
 ---
 
 ### 🔟 Transfer Tokens
+
 ```bash
 spl-token transfer <MINT_ADDRESS> 100 <RECIPIENT_ADDRESS>
 ```
@@ -228,6 +282,7 @@ Then refresh views:
 ---
 
 ## 🧭 Quick Recap
+
 For reference, here’s the full command sequence:
 
 ---
@@ -250,6 +305,6 @@ For reference, here’s the full command sequence:
 
 ---
 
-🧠 **Author:** BlockExplorer 
+🧠 **Author:** BlockExplorer  
 📅 **Updated:** October 2025  
 📘 **Version:** Token-2022 Tutorial Edition
